@@ -8,7 +8,7 @@ load_dotenv()
 # Creating one client, reused across all calls
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3.1-flash-lite"
 
 
 def chat(messages, system=None, max_tokens=1024):
@@ -84,8 +84,3 @@ def chat_stream(messages, system=None):
 
     return full_text
 
-
-# Sanity check — delete these 3 lines after it works
-if __name__ == "__main__":
-    result = chat(messages=[{"role": "user", "content": "Say hello in one sentence."}])
-    print(result)
