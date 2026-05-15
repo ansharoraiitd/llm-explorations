@@ -57,3 +57,23 @@ A model that's confident tends to give the same answer.
 By running the same question 3 times and taking majority vote,
 you statistically filter out the uncertain, wrong answers.
 Tradeoff: 3x the API cost. Worth it for high-stakes factual queries.
+
+## Why use a class for the chatbot instead of functions
+The chatbot has state — history, session ID, turn count, system prompt.
+Functions would require passing all this state around as parameters.
+A class bundles state and behaviour together cleanly. When you read
+ChatBot.chat() you immediately know it uses self.history and
+self.system_prompt — no hunting through parameters.
+
+## Why handle KeyboardInterrupt separately from Exception
+Ctrl+C is not a bug — it's intentional user behaviour.
+Catching it separately lets me run save_session() cleanly before
+exiting. If I only had a broad except, Ctrl+C might get swallowed
+or handled identically to a real error. Separate handling = 
+correct behaviour for each case.
+
+## Why auto-compress at 20 messages not sooner
+Too aggressive compression loses context too early — the chatbot
+starts forgetting things the user just said. 20 messages is roughly
+10 conversation turns, which is enough for meaningful sessions while
+still being well within token limits for the models I'm using.
