@@ -1,5 +1,5 @@
 from llm import chat
-'''
+
 #Pattern1 - Chain of Thought(CoT)
 # We force the model to give step by step reasoning before answering.
 # Works dramatically better for complex reasoning tasks.
@@ -86,7 +86,7 @@ for user_input in test_inputs:
     )
     print(f"Input: {user_input}")
     print(f"Intent: {result.strip()}\n")
-'''
+
 
 #Pattern 3 - Self-consistency
 #Asking the same questions multiple times and take the majority answer.
