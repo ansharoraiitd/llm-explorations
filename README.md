@@ -7,3 +7,5 @@
 | 02_system_prompts.py | 5 system prompt experiments — personas, formats, JSON |
 | 03_conversation.py | Multi-turn memory, stateless proof, history growth |
 | 04_context_limits.py | Token counting, context window management, summarisation |
+| 05_structured_output.py | Pydantic structured outputs, JSON enforcement, safe parsing |
+| 06_prompt_patterns.py   | Chain-of-thought, few-shot, self-consistency patterns       |

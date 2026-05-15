@@ -35,3 +35,25 @@ This is a rough heuristic, not exact. The real approach is
 using the model's native tokeniser. I used the estimate here
 to keep focus on the concept — in production I'd use the
 actual token count from the API response.
+
+## Why Pydantic over plain json.loads()
+json.loads() just gives you a dict — no validation, no types,
+no guarantee the fields you need are actually there.
+Pydantic validates the shape, enforces types, and raises a 
+clear error with the exact field that's wrong. In a multi-step
+agent where one step's output feeds the next, silent bad data
+is catastrophic. Pydantic makes bad data loud and obvious.
+
+## Why wrap JSON parsing in try/except always
+LLMs are probabilistic — even with a perfect system prompt,
+the model occasionally returns malformed JSON (extra text,
+wrong field names, wrong types). In production you cannot
+let a parsing failure crash the entire agent. try/except lets
+you retry with a stronger prompt or return a safe fallback.
+
+## Why self-consistency works
+A model that's uncertain tends to vary its answer across runs.
+A model that's confident tends to give the same answer.
+By running the same question 3 times and taking majority vote,
+you statistically filter out the uncertain, wrong answers.
+Tradeoff: 3x the API cost. Worth it for high-stakes factual queries.
