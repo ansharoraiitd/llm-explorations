@@ -24,17 +24,18 @@ pip install -r requirements.txt
 Add GEMINI_API_KEY to .env
 python chatbot.py
 
-## Files
-| File | What it does |
-|------|-------------|
-| llm.py | Reusable Gemini helper — chat() and chat_stream() |
-| 01_first_call.py | First API calls, max_tokens, streaming experiments |
-| 02_system_prompts.py | 5 system prompt experiments — personas, formats, JSON |
-| 03_conversation.py | Multi-turn memory, stateless proof, history growth |
-| 04_context_limits.py | Token counting, context limits, summarisation |
-| 05_structured_output.py | Pydantic structured outputs, safe JSON parsing |
-| 06_prompt_patterns.py | CoT, few-shot, self-consistency patterns |
-| chatbot.py | Complete CLI chatbot — the week's main deliverable |
+## Project structure
+llm-explorations/
+├── llm.py                  # Reusable Gemini API helper
+├── chatbot.py              # Main CLI chatbot application
+├── 01_first_call.py        # Basic API calls and streaming
+├── 02_system_prompts.py    # System prompt experiments
+├── 03_conversation.py      # Conversation memory
+├── 04_context_limits.py    # Token counting and summarisation
+├── 05_structured_output.py # Pydantic structured outputs
+├── 06_prompt_patterns.py   # CoT, few-shot, self-consistency
+├── requirements.txt        # Python dependencies
+└── .env.example            # Template for API keys
 
 ## Key learnings
 - LLMs are stateless — memory is a list you manage, not the model
