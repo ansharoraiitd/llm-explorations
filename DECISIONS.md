@@ -77,3 +77,33 @@ Too aggressive compression loses context too early — the chatbot
 starts forgetting things the user just said. 20 messages is roughly
 10 conversation turns, which is enough for meaningful sessions while
 still being well within token limits for the models I'm using.
+
+### Why I use os.makedirs("sessions", exist_ok=True)
+exist_ok=True means it doesn't throw an error if the folder
+already exists. Without it, the second time you save a session
+you'd get a FileExistsError. This is defensive programming —
+write code that handles the expected states, not just the happy path.
+
+### Why chain-of-thought prompting works
+When you force a model to reason step-by-step before answering,
+two things happen: (1) the model can't jump to a conclusion, it
+has to work through intermediate steps; (2) each reasoning step
+becomes context for the next step, so errors compound less.
+The analogy: asking someone to show their working in maths.
+
+### Why few-shot prompting beats long instructions
+Instructions are abstract. Examples are concrete. When I show the
+model 8 examples of "input → category", it learns the pattern from
+the examples better than it would from a paragraph of rules about
+how to classify. Human brains and LLMs both learn better from
+examples than from abstract descriptions.
+
+### What I would improve with more time
+- Add actual token counting using the model's native API instead
+  of the len(text)//4 estimate
+- Add session restore — load a previous session.json and continue
+  the conversation from where it left off
+- Add streaming to work correctly in all edge cases (very long
+  responses, interrupted streams)
+- Add a proper logging system instead of print() for debugging
+
