@@ -13,10 +13,10 @@ class ChatBot:
     saves sessions to disk, and supports streaming output.
 
     Everything in this class uses concepts from this week:
-    - conversation history (Wednesday)
-    - system prompts (Tuesday)
-    - streaming (Tuesday)
-    - session persistence (new today)
+    - conversation history 
+    - system prompts 
+    - streaming 
+    - session persistence (new)
     """
 
     def __init__(self, system_prompt: str, use_streaming: bool = True):
@@ -39,7 +39,7 @@ class ChatBot:
         })
 
         # Auto-compress history if it gets too long
-        # (using the summarisation concept from Wednesday)
+        # (using the summarisation concept from earlier)
         if len(self.history) > 20:
             self._compress_history()
 
@@ -70,7 +70,7 @@ class ChatBot:
         """
         When history gets long, summarise old turns.
         Keeps the last 4 messages fresh, summarises the rest.
-        (Wednesday's summarisation concept, now as a class method)
+        (summarisation concept, now as a class method)
         """
         if len(self.history) <= 4:
             return
