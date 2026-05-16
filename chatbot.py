@@ -144,12 +144,14 @@ class ChatBot:
 def print_help():
     """Print available commands."""
     print("\nCommands:")
-    print("  /save    — save session to disk")
-    print("  /stats   — show token usage and turn count")
-    print("  /history — show raw conversation history")
-    print("  /clear   — start a fresh conversation")
-    print("  /help    — show this menu")
-    print("  /quit    — save and exit\n")
+    print("  /save    - save session to disk")
+    print("  /stats   - show token usage and turn count")
+    print("  /history - show raw conversation history")
+    print("  /clear   - start a fresh conversation")
+    print("  /help    - show this menu")
+    print("  /quit    - save and exit\n")
+    print("  /model   - show which AI model is being used")
+
 
 
 def main():
@@ -198,6 +200,8 @@ wants depth, not simplifications."""
                 print("[Conversation cleared — fresh start]\n")
             elif user_input.lower() == "/help":
                 print_help()
+            elif user_input.lower() == "/model":
+                print(f"\n[Model: gemini-3.1-flash-lite | Session: {bot.session_id}]\n")    
             else:
                 # Normal message — send to bot
                 bot.chat(user_input)
